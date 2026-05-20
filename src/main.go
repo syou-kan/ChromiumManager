@@ -21,7 +21,7 @@ import (
 //go:embed web/dist
 var webFS embed.FS
 
-const serverAddr = "127.0.0.1:10101"
+const serverAddr = "0.0.0.0:10101"
 
 var (
 	sq      *sqids.Sqids
