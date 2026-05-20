@@ -2,7 +2,7 @@ FROM node:22-alpine AS nodebuilder
 WORKDIR /build
 RUN npm i -g pnpm
 COPY src/web/package.json src/web/pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY src/web/ .
 RUN pnpm build
 
