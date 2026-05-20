@@ -31,10 +31,11 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/*
 
-COPY ungoogled-chromium-*-${TARGETARCH}_linux.tar.gz /tmp/
+# 修改后：
+COPY ungoogled-chromium-*-${TARGETARCH}_linux.tar.xz /tmp/
 RUN mkdir -p /opt/chromium && \
-  tar xf /tmp/ungoogled-chromium-*-${TARGETARCH}_linux.tar.gz --strip-components=1 -C /opt/chromium && \
-  rm -f /tmp/ungoogled-chromium-*.tar.gz
+  tar xf /tmp/ungoogled-chromium-*-${TARGETARCH}_linux.tar.xz --strip-components=1 -C /opt/chromium && \
+  rm -f /tmp/ungoogled-chromium-*.tar.xz
 
 COPY --from=builder /build/manager /usr/bin/manager
 
