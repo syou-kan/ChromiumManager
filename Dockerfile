@@ -22,7 +22,7 @@ ENV DATA_DIR=/config/data
 RUN \
   echo "**** install packages ****" && \
   apt-get update && \
-  apt-get install -y --no-install-recommends libgtk-3-0 libnss3 libasound2t64 tint2 desktop-file-utils fonts-noto-cjk-extra && \
+  apt-get install -y --no-install-recommends libgtk-3-0 libnss3 libasound2t64 tint2 desktop-file-utils fonts-noto-cjk-extra xz-utils && \
   fc-cache -fv && \
   echo "**** cleanup ****" && \
   apt-get clean && \
