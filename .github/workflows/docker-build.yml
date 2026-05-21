@@ -14,29 +14,15 @@ jobs:
       packages: write
 
     steps:
-      # 1. 拉取代码 (使用原项目自带的最新 v5 版本)
       - name: Checkout code
         uses: actions/checkout@v5
 
-      # 2. 在宿主机直接下载并解压 Chromium (绕过 Docker 内缺失 xz 的问题)
-      - name: Download and Extract Ungoogled Chromium (ARM64)
-        run: |
-          wget -q https://github.com/ungoogled-software/ungoogled-chromium-portablelinux/releases/download/148.0.7778.96-1/ungoogled-chromium-148.0.7778.96-1-arm64_linux.tar.xz
-          mkdir -p chromium-bin
-          tar xf ungoogled-chromium-148.0.7778.96-1-arm64_linux.tar.xz \
-            --strip-components=1 \
-            -C chromium-bin
-          rm ungoogled-chromium-148.0.7778.96-1-arm64_linux.tar.xz
-
-      # 3. 设置多架构支持 (使用原项目自带的 v4)
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      # 4. 设置 Buildx 构建器 (使用原项目自带的 v3/v4 均可)
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 5. 登录 GitHub 镜像仓库 (GHCR)
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -44,9 +30,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # 6. 构建并推送镜像 (使用原项目自带的 v6/v7，消灭 Node 警告)
       - name: Build and Push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           platforms: linux/arm64
