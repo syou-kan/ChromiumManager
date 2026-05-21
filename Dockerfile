@@ -8,10 +8,9 @@ COPY . .
 # 如果前端目录不在根目录，请进入对应目录，例如 RUN cd web && pnpm build
 RUN pnpm build
 
-# === 2. 编译后端 ===
 FROM golang:1.22-alpine AS gobuilder
 WORKDIR /app
-COPY go.mod go.sum ./
+COPY go.mod go.sum* ./
 RUN go mod download
 COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -o chromium-manager .
