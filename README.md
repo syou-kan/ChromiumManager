@@ -1,4 +1,4 @@
-# Chromium Manager
+
 
 ### Chromium 浏览器环境管理系统
 
